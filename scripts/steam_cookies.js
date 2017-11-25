@@ -17,7 +17,7 @@ function rememberCookie(cookie){
 
 function saveAllTheInterestingCookies(cookieList){
     for(let cookie of cookieList){
-        if(isCookieInteresting(cookie){
+        if(isCookieInteresting(cookie)){
             rememberCookie(cookie)
         }
     }

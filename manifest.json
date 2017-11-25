@@ -1,28 +1,29 @@
 {
-  "author": "Bigfootmech",
+    "author": "Bigfootmech",
 
-  "manifest_version": 2,
-  "name": "Steam Forgetmenot",
-  "version": "1.0",
+    "manifest_version": 2,
+    "name": "Steam Forgetmenot",
+    "version": "1.0",
+    "homepage_url": "https://github.com/Bigfootmech/Steam-Forgetmenot",
 
-  "description": "Does something to all steam webpages.",
+    "description": "Does something to all steam webpages.",
 
-  "icons": {
-    "48": "icon.svg",
-    "96": "icon.svg"
-  },
+    "icons": {
+        "48": "icons/icon.svg",
+        "96": "icons/icon.svg"
+    },
 
-  "permissions": [
-    "*://steamcommunity.com/*", "*://store.steampowered.com/*", "*://help.steampowered.com/*",
-    "cookies",
-    "storage"
-  ],
+    "permissions": [
+        "*://steamcommunity.com/*", "*://store.steampowered.com/*", "*://help.steampowered.com/*",
+        "cookies",
+        "storage"
+    ],
 
-  "content_scripts": [
-    {
-      "matches": ["*://steamcommunity.com/*", "*://store.steampowered.com/*", "*://help.steampowered.com/*"],
-      "js": ["scripts/steam_cookies.js"]
-    }
-  ]
+    "content_scripts": [
+        {
+            "matches": ["*://steamcommunity.com/*", "*://store.steampowered.com/*", "*://help.steampowered.com/*"],
+            "js": ["scripts/steam_cookies.js"]
+        }
+    ]
 
 }
