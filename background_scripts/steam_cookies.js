@@ -22,10 +22,25 @@ function saveAllTheInterestingCookies(cookieList){
     }
 }
 
+function fillAllTheCookies(cookiesByType){
+    console.log("Local storage contained:'" + cookiesByType + "'");
+    var cookies = Object.values(cookiesByType);
+    for (let cookie of cookies) {
+        console.log("COOOKIE:'" + cookie.name + "'");
+        browser.cookies.set(cookie)
+    }
+}
+
 function saveCookiesForDomain(domain){
     console.log("For domain:'" + domain + "'");
     var promiseOfCookies = browser.cookies.getAll({domain: domain});
     promiseOfCookies.then(saveAllTheInterestingCookies);
+}
+
+function fillAll(){
+    console.log("Filling");
+    var myStoredCookies = browser.storage.local.get(null);
+    myStoredCookies.then(fillAllTheCookies)
 }
 
 function sniffForCookies(){
@@ -35,9 +50,9 @@ function sniffForCookies(){
     }
 }
 
-
 function listener(request, sender){
     sniffForCookies()
+    fillAll()
 }
 
 browser.runtime.onMessage.addListener(listener);
