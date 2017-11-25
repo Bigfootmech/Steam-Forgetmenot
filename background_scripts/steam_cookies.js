@@ -23,7 +23,7 @@ function saveAllTheInterestingCookies(cookieList){
 }
 
 function fillAllTheCookies(cookiesByType){
-    console.log("Local storage contained:'" + cookiesByType + "'");
+    console.log("Local storage contained:'" + JSON.stringify(cookiesByType, null, 2) + "'");
     var cookies = Object.values(cookiesByType);
     for (let cookie of cookies) {
         console.log("COOOKIE:'" + cookie.name + "'");
