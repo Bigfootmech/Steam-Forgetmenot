@@ -1,0 +1,28 @@
+{
+  "author": "Bigfootmech",
+
+  "manifest_version": 2,
+  "name": "Steam Forgetmenot",
+  "version": "1.0",
+
+  "description": "Does something to all steam webpages.",
+
+  "icons": {
+    "48": "icon.svg",
+    "96": "icon.svg"
+  },
+
+  "permissions": [
+    "*://steamcommunity.com/*", "*://store.steampowered.com/*", "*://help.steampowered.com/*",
+    "cookies",
+    "storage"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://steamcommunity.com/*", "*://store.steampowered.com/*", "*://help.steampowered.com/*"],
+      "js": ["scripts/steam_cookies.js"]
+    }
+  ]
+
+}

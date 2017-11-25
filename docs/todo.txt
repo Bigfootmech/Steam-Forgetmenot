@@ -1,0 +1,88 @@
+
+Browser:
+    steamcommunity.com
+        Well isolated - virtual machine only?
+        Trying Sandboxie - cookie seems to be deleted anyway?? (no, cookies are erased. also crashes a lot on close)
+        Save cookie manually, and relaunch with it?
+        
+        Cookies before login:
+        sessionid (expires At end of session)
+        steamCountry (expires At end of session)
+        rgTopicView_General_4009259 (expires At end of session, changed once logged in to ~8 minutes)
+        rgTopicView_General_4009259_1 (expires At end of session, changed once logged in to ~10 minutes)
+        timezoneOffset (expires At end of session, changes once logged in to 1 year)
+        
+        Cookie saved:
+            steamLogin (expires At end of session)
+            steamLoginSecure (expires At end of session)
+            steamRememberLogin (76561197963625792%7C%7C8fb481c8d14bac5e1c9e1e8a4b3ae354) (1 month)
+            
+            steamMachineAuthXXXXXXXXXXXXXXXXX (ie: steamMachineAuth76561197963625792) (10 Years)
+            steamMachineAuth76561197963625792 (BAFA3A243746227EA93FD7746ABB172EE5BA1F11) (10 Years)
+    
+    store.steampowered.com
+        sessionid (expires At end of session)
+        steamLogin (expires At end of session)
+        steamLoginSecure (expires At end of session)
+        steamRememberLogin (76561197963625792%7C%7C8fb481c8d14bac5e1c9e1e8a4b3ae354) (1 month)
+        
+        steamCountry (end of session)
+        
+        browserid (1 year)
+        app_impressions (end of session)
+        
+        steamMachineAuth76561197963625792 (88FDCA79ED4AD223992E96055AAA565F9C61A193) (10 years)
+        
+    help.steampowered.com
+        sessionid (expires At end of session)
+        steamLogin (expires At end of session)
+        steamLoginSecure (expires At end of session)
+        steamRememberLogin (76561197963625792%7C%7C8fb481c8d14bac5e1c9e1e8a4b3ae354) (1 month)
+        
+        steamMachineAuth76561197963625792 (88FDCA79ED4AD223992E96055AAA565F9C61A193) (10 years)
+
+        
+    THIRD PART ENABLED!
+        All 3 (steamcommunity AND help.steampowered AND store.steampowered)
+        get same 
+            steamLogin
+            steamLoginSecure
+            steamRememberLogin (76561197963625792%7C%7C8fb481c8d14bac5e1c9e1e8a4b3ae354) (1 month)
+            steamMachineAuth76561197963625792 (88FDCA79ED4AD223992E96055AAA565F9C61A193) (10 years)
+            
+        sessionid = DIFFERENT for steamcommunity & help.steampowered (store has no session id??)
+        
+    On logout: steamHelpHistory (end of session)
+    
+    BUG?: steampowered seems to "forget" machine ID, steamcommunity does not? Only when going from community to store?
+
+
+    Plugin name "Steam Forgetmenot"? Icon: black background S/F 
+    On steam load webpage: 
+        if not steampowered or steamcommunity, ignore
+        if steamMachineAuth or steamRememberLogin present in cookies, try to remember them, and fill all
+        if steamMachineAuth or steamRememberLogin not present, try to fill them from local store
+        
+    Security risk? :/ - set this as default behaviour?:
+        Only fill on manual
+        Only remember on manual
+        
+    Manual changing of details allowed?
+    
+    Try to find steam machine details in steam folder??? Appdata??? and store in this?!?
+    Where's their chromium at?
+    C:\Program Files (x86)\Steam\bin\cef\cef.win7 ???
+    
+    Cookies???
+    %APPDATA% ? (no, redirects to %USERPROFILE%\AppData\Roaming)
+    %USERPROFILE%\AppData\Local\Steam\htmlcache\Cookies (SQLite format 3)
+    https://sqlite.org/download.html
+    
+    .open %USERPROFILE%\AppData\Local\Steam\htmlcache\Cookies ???
+    
+    On first launch of plugin - try to "store then fill" from there??
+    
+    
+    Contains username (UserID/AccountName):
+    C:\Program Files (x86)\Steam\config\loginusers.vdf
+    SteamAppData.vdf
