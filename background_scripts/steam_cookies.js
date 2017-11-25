@@ -1,5 +1,3 @@
-document.body.style.border = "5px solid red";
-
 var domains = ["*://steamcommunity.com/*", "*://store.steampowered.com/*", "*://help.steampowered.com/*"]
 
 function onError(error){
@@ -16,22 +14,35 @@ function rememberCookie(cookie){
 }
 
 function saveAllTheInterestingCookies(cookieList){
+    console.log("Looking for interesting cookies in '" + cookieList + "'");
     for(let cookie of cookieList){
+        console.log("What is this?:'" + cookie + "'");
+        console.log("Domain:'" + cookie.domain + "'");
         if(isCookieInteresting(cookie)){
+            console.log("Interesting cookie found:'" + cookie.name + "'");
             rememberCookie(cookie)
+        } else {
+            console.log("Not interesting cookie:'" + cookie.name + "'");
         }
     }
 }
 
 function saveCookiesForDomain(domain){
-    var promiseOfCookies = browser.cookies.getAll({url: domain});
-    promiseOfCookies.then(saveAllTheInterestingCookies);
+    console.log("For domain:'" + domain + "'");
+    var promiseOfCookies = browser.cookies.getAll({});
+    promiseOfCookies.then(function(cookieList) {saveAllTheInterestingCookies(cookieList)});
 }
 
 function sniffForCookies(){
+    console.log("Sniffing");
     for(let domain of domains){
         saveCookiesForDomain(domain)
     }
 }
 
-sniffForCookies()
+
+function listener(request, sender){
+    sniffForCookies()
+}
+
+browser.runtime.onMessage.addListener(listener);
