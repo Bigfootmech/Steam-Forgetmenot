@@ -4,6 +4,15 @@ function onError(error){
     console.log(error)
 }
 
+function retrofit(cookie){
+    console.log("COOOKIE:'" + cookie.name + "'");
+    cookie.url = "http://" + cookie.domain + "/"
+    console.log("Set cookie url to:'" + cookie.url + "'");
+    delete cookie.hostOnly
+    delete cookie.session
+    return cookie
+}
+
 function isCookieInteresting(cookie){
     return cookie.name === "steamRememberLogin" || cookie.name.includes("steamMachineAuth")
 }
@@ -26,8 +35,7 @@ function fillAllTheCookies(cookiesByType){
     console.log("Local storage contained:'" + JSON.stringify(cookiesByType, null, 2) + "'");
     var cookies = Object.values(cookiesByType);
     for (let cookie of cookies) {
-        console.log("COOOKIE:'" + cookie.name + "'");
-        browser.cookies.set(cookie)
+        browser.cookies.set(retrofit(cookie))
     }
 }
 
