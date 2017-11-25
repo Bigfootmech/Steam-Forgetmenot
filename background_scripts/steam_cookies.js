@@ -30,7 +30,7 @@ function saveAllTheInterestingCookies(cookieList){
 function saveCookiesForDomain(domain){
     console.log("For domain:'" + domain + "'");
     var promiseOfCookies = browser.cookies.getAll({});
-    promiseOfCookies.then(function(cookieList) {saveAllTheInterestingCookies(cookieList)});
+    promiseOfCookies.then(saveAllTheInterestingCookies);
 }
 
 function sniffForCookies(){
