@@ -4,10 +4,9 @@ function onError(error){
     console.log(error)
 }
 
-function retrofit(cookie){
-    console.log("COOOKIE:'" + cookie.name + "'");
+function retrofit(cookie, domainName){
+    cookie.domain = domainName
     cookie.url = "http://" + cookie.domain + "/"
-    console.log("Set cookie url to:'" + cookie.url + "'");
     delete cookie.hostOnly
     delete cookie.session
     return cookie
@@ -35,7 +34,9 @@ function fillAllTheCookies(cookiesByType){
     console.log("Local storage contained:'" + JSON.stringify(cookiesByType, null, 2) + "'");
     var cookies = Object.values(cookiesByType);
     for (let cookie of cookies) {
-        browser.cookies.set(retrofit(cookie))
+        for(let domainName of domains){
+            browser.cookies.set(retrofit(cookie, domainName))
+        }
     }
 }
 
